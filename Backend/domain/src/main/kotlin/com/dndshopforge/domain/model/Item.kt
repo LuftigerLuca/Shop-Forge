@@ -3,7 +3,9 @@ package com.dndshopforge.domain.model
 import com.dndshopforge.domain.result.Result
 import com.dndshopforge.domain.result.map
 import com.dndshopforge.domain.result.zip
+import kotlin.ConsistentCopyVisibility
 
+@ConsistentCopyVisibility
 data class Item private constructor(
     val id: ItemId,
     val name: ItemName,
