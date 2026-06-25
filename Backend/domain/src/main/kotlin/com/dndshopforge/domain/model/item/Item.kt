@@ -21,8 +21,11 @@ data class Item private constructor(
                 val itemId = idResult.bind()
                 val itemName = ItemName.of(name).bind()
 
-                if (itemId == null || itemName == null) null
-                else Item(itemId, itemName)
+                if (itemId == null || itemName == null) {
+                    null
+                } else {
+                    Item(itemId, itemName)
+                }
             }
         }
     }
