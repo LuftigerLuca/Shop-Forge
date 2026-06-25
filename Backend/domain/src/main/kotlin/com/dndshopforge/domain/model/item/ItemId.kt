@@ -1,4 +1,4 @@
-package com.dndshopforge.domain.model
+package com.dndshopforge.domain.model.item
 
 import com.dndshopforge.domain.result.Problem
 import com.dndshopforge.domain.result.Result

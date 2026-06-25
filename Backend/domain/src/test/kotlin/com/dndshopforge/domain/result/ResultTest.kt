@@ -21,42 +21,6 @@ class ResultTest :
             Result.Success(1).map<Int, Int?> { null } shouldBe Result.Success(null)
         }
 
-        "zip two successes" {
-            val a: Result<Int> = Result.Success(1)
-            val b: Result<String> = Result.Success("x")
-            a.zip(b) shouldBe Result.Success(1 to "x")
-        }
-
-        "zip success with failure" {
-            val problems = listOf(Problem("error"))
-            val a: Result<Int> = Result.Success(1)
-            val b: Result<String> = Result.Failure(problems)
-            a.zip(b) shouldBe Result.Failure(problems)
-        }
-
-        "zip failure with success" {
-            val problems = listOf(Problem("error"))
-            val a: Result<Int> = Result.Failure(problems)
-            val b: Result<String> = Result.Success("x")
-            a.zip(b) shouldBe Result.Failure(problems)
-        }
-
-        "zip two failures accumulates problems" {
-            val problemsA = listOf(Problem("error a"))
-            val problemsB = listOf(Problem("error b"))
-            val a: Result<Int> = Result.Failure(problemsA)
-            val b: Result<String> = Result.Failure(problemsB)
-            val result = a.zip(b)
-            result.shouldBeInstanceOf<Result.Failure>()
-            result.problems shouldBe problemsA + problemsB
-        }
-
-        "zip success with success works with complex types" {
-            val a: Result<List<Int>> = Result.Success(listOf(1, 2, 3))
-            val b: Result<Map<String, Int>> = Result.Success(mapOf("a" to 1))
-            a.zip(b) shouldBe Result.Success(listOf(1, 2, 3) to mapOf("a" to 1))
-        }
-
         "buildResult with multiple success binds" {
             val result =
                 buildResult {

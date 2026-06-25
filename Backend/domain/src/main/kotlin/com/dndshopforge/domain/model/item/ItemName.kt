@@ -1,4 +1,4 @@
-package com.dndshopforge.domain.model
+package com.dndshopforge.domain.model.item
 
 import com.dndshopforge.domain.result.Problem
 import com.dndshopforge.domain.result.Result
@@ -13,7 +13,11 @@ value class ItemName private constructor(
         fun of(value: String): Result<ItemName> =
             validate(value) {
                 (value.isNotBlank()) otherwise Problem("must not be blank", Problem.ProblemType.VALIDATION)
-                (value.length <= 100) otherwise Problem("must not exceed 100 characters", Problem.ProblemType.VALIDATION)
+                (value.length <= 100) otherwise
+                    Problem(
+                        "must not exceed 100 characters",
+                        Problem.ProblemType.VALIDATION,
+                    )
             }.map { ItemName(it) }
     }
 }
