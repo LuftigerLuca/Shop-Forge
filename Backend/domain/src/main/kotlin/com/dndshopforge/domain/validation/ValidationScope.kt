@@ -4,7 +4,7 @@ import com.dndshopforge.domain.result.Problem
 import com.dndshopforge.domain.result.Result
 
 class ValidationScope<T>(
-    private val value: T,
+    val value: T,
 ) {
     private val _problems = mutableListOf<Problem>()
     val problems: List<Problem> get() = _problems
