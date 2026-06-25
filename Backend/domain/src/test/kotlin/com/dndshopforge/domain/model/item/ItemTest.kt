@@ -1,5 +1,6 @@
 package com.dndshopforge.domain.model
 
+import com.dndshopforge.domain.model.item.Item
 import com.dndshopforge.domain.result.Problem
 import com.dndshopforge.domain.result.Result
 import io.kotest.core.spec.style.StringSpec
