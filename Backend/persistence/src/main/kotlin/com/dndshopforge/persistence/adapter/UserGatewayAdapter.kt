@@ -1,10 +1,10 @@
 package com.dndshopforge.persistence.adapter
 
-import com.dndshopforge.domain.gateway.UserGateway
-import com.dndshopforge.domain.model.user.User
-import com.dndshopforge.domain.model.user.UserId
-import com.dndshopforge.domain.result.Problem
-import com.dndshopforge.domain.result.Result
+import com.dndshopforge.domain.shared.result.Problem
+import com.dndshopforge.domain.shared.result.Result
+import com.dndshopforge.domain.user.gateway.UserGateway
+import com.dndshopforge.domain.user.model.User
+import com.dndshopforge.domain.user.model.UserId
 import com.dndshopforge.persistence.entity.UserEntity
 import com.dndshopforge.persistence.mapper.UserMapper
 import com.dndshopforge.persistence.repository.UserRepository

@@ -1,7 +1,7 @@
 package com.dndshopforge.persistence.mapper
 
-import com.dndshopforge.domain.model.user.User
-import com.dndshopforge.domain.result.Result
+import com.dndshopforge.domain.shared.result.Result
+import com.dndshopforge.domain.user.model.User
 import com.dndshopforge.persistence.entity.UserEntity
 
 object UserMapper {
