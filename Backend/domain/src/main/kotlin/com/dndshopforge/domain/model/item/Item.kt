@@ -35,7 +35,7 @@ data class Item private constructor(
                         name = itemName,
                         category = category,
                         rarity = rarity,
-                        sourceBook = sourceBook
+                        sourceBook = sourceBook,
                     )
                 }
             }

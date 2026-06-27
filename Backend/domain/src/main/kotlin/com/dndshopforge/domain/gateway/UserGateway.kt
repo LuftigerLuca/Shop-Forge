@@ -6,5 +6,6 @@ import com.dndshopforge.domain.result.Result
 
 interface UserGateway : ReadWriteGateway<User, UserId> {
     fun findByUsername(username: String): Result<User>
+
     fun existsByUsername(username: String): Boolean
 }
