@@ -16,4 +16,5 @@ pluginManagement {
 include(":domain")
 include(":application")
 include(":persistence")
+include(":web")
 include(":bootstrap")

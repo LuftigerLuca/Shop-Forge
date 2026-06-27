@@ -4,12 +4,12 @@ plugins {
 }
 
 dependencies {
-    implementation(platform(libs.spring.boot.dependencies))
+    implementation(platform(libs.bom.spring.boot))
     implementation(project(":domain"))
-    implementation(libs.spring.boot.starter.data.jpa)
+    implementation(libs.spring.boot.jpa)
 
     runtimeOnly(libs.h2)
 
-    testImplementation(libs.kotest.runner.junit5)
-    testImplementation(libs.kotest.assertions.core)
+    testImplementation(libs.kotest.runner)
+    testImplementation(libs.kotest.assertions)
 }
