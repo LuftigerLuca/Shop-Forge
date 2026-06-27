@@ -11,21 +11,21 @@ class ItemTest :
     StringSpec({
 
         "without id should generate random id" {
-            val result = Item.of(name = "Sword")
+            val result = Item.of(name = "Sword", category = ItemCategory.WEAPON, rarity = ItemRarity.COMMON, sourceBook = SourceBook.PHB)
             result.shouldBeInstanceOf<Result.Success<Item>>()
             result.data.name.value shouldBe "Sword"
         }
 
         "with valid id and name should succeed" {
             val id = UUID.randomUUID().toString()
-            val result = Item.of(id = id, name = "Shield")
+            val result = Item.of(id = id, name = "Shield", category = ItemCategory.ARMOR, rarity = ItemRarity.COMMON, sourceBook = SourceBook.PHB)
             result.shouldBeInstanceOf<Result.Success<Item>>()
             result.data.id.value shouldBe id
             result.data.name.value shouldBe "Shield"
         }
 
         "with blank name should fail" {
-            val result = Item.of(name = "")
+            val result = Item.of(name = "", category = ItemCategory.WEAPON, rarity = ItemRarity.COMMON, sourceBook = SourceBook.PHB)
             result shouldBe
                 Result.Failure(
                     listOf(Problem("must not be blank", Problem.ProblemType.VALIDATION)),
@@ -33,7 +33,7 @@ class ItemTest :
         }
 
         "with blank id and blank name should accumulate both problems" {
-            val result = Item.of(id = "", name = "")
+            val result = Item.of(id = "", name = "", category = ItemCategory.WEAPON, rarity = ItemRarity.COMMON, sourceBook = SourceBook.PHB)
             result.shouldBeInstanceOf<Result.Failure>()
             result.problems shouldBe
                 listOf(
