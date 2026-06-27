@@ -9,11 +9,17 @@ import kotlin.ConsistentCopyVisibility
 data class Item private constructor(
     val id: ItemId,
     val name: ItemName,
+    val category: ItemCategory,
+    val rarity: ItemRarity,
+    val sourceBook: SourceBook,
 ) {
     companion object {
         fun of(
             id: String? = null,
             name: String,
+            category: ItemCategory,
+            rarity: ItemRarity,
+            sourceBook: SourceBook,
         ): Result<Item> {
             val idResult = id?.let { ItemId.of(it) } ?: Result.Success(ItemId.random())
 
@@ -24,7 +30,13 @@ data class Item private constructor(
                 if (itemId == null || itemName == null) {
                     null
                 } else {
-                    Item(itemId, itemName)
+                    Item(
+                        id = itemId,
+                        name = itemName,
+                        category = category,
+                        rarity = rarity,
+                        sourceBook = sourceBook
+                    )
                 }
             }
         }
