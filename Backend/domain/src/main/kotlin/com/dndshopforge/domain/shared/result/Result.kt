@@ -10,6 +10,16 @@ sealed class Result<out T> {
     ) : Result<Nothing>()
 }
 
+fun <T> Result<T>.getOrNull(): T? =
+    when (this) {
+        is Result.Success -> data
+        is Result.Failure -> null
+    }
+
+fun <T> Result<T>.isSuccess() = this is Result.Success
+
+fun <T> Result<T>.isFailure() = this is Result.Failure
+
 fun <T, R> Result<T>.map(transform: (T) -> R): Result<R> =
     when (this) {
         is Result.Success -> Result.Success(transform(data))

@@ -7,6 +7,7 @@ data class Problem(
     enum class ProblemType {
         VALIDATION,
         NOT_FOUND,
+        UNAUTHORIZED,
         CONFLICT,
         INTERNAL,
         PERSISTENCE,

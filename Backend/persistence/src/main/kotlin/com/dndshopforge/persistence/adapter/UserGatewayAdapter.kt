@@ -5,6 +5,7 @@ import com.dndshopforge.domain.shared.result.Result
 import com.dndshopforge.domain.user.gateway.UserGateway
 import com.dndshopforge.domain.user.model.User
 import com.dndshopforge.domain.user.model.UserId
+import com.dndshopforge.domain.user.model.UserName
 import com.dndshopforge.persistence.entity.UserEntity
 import com.dndshopforge.persistence.mapper.UserMapper
 import com.dndshopforge.persistence.repository.UserRepository
@@ -53,11 +54,11 @@ class UserGatewayAdapter(
         repository.deleteById(id.value)
     }
 
-    override fun findByUsername(username: String): Result<User> =
+    override fun findByUsername(username: UserName): Result<User> =
         repository
-            .findByName(username)
+            .findByName(username.value)
             ?.let { toResult(it) }
             ?: Result.Failure(listOf(Problem("User not found", Problem.ProblemType.NOT_FOUND)))
 
-    override fun existsByUsername(username: String): Boolean = repository.existsByName(username)
+    override fun existsByUsername(username: UserName): Boolean = repository.existsByName(username.value)
 }

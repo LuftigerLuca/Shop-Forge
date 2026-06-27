@@ -14,7 +14,7 @@ value class UserPasswordHash private constructor(
             validate(value) {
                 (value.isNotBlank()) otherwise Problem("must not be blank", Problem.ProblemType.VALIDATION)
                 (value.length <= 128) otherwise Problem("must not exceed 128 characters", Problem.ProblemType.VALIDATION)
-                (value.length >= 23) otherwise
+                (value.length >= 32) otherwise
                     Problem(
                         "must not be less than 32 characters",
                         Problem.ProblemType.VALIDATION,
