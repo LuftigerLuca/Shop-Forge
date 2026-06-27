@@ -7,12 +7,12 @@ import com.dndshopforge.domain.result.Problem
 import com.dndshopforge.domain.result.Result
 import com.dndshopforge.persistence.entity.UserEntity
 import com.dndshopforge.persistence.mapper.UserMapper
-import com.dndshopforge.persistence.repository.UserJpaRepository
+import com.dndshopforge.persistence.repository.UserRepository
 import org.springframework.stereotype.Component
 
 @Component
 class UserGatewayAdapter(
-    private val repository: UserJpaRepository,
+    private val repository: UserRepository,
 ) : UserGateway {
     private fun toResult(entity: UserEntity): Result<User> {
         val mapped = UserMapper.toDomain(entity)

@@ -18,7 +18,14 @@ class ItemTest :
 
         "with valid id and name should succeed" {
             val id = UUID.randomUUID().toString()
-            val result = Item.of(id = id, name = "Shield", category = ItemCategory.ARMOR, rarity = ItemRarity.COMMON, sourceBook = SourceBook.PHB)
+            val result =
+                Item.of(
+                    id = id,
+                    name = "Shield",
+                    category = ItemCategory.ARMOR,
+                    rarity = ItemRarity.COMMON,
+                    sourceBook = SourceBook.PHB,
+                )
             result.shouldBeInstanceOf<Result.Success<Item>>()
             result.data.id.value shouldBe id
             result.data.name.value shouldBe "Shield"
@@ -33,7 +40,14 @@ class ItemTest :
         }
 
         "with blank id and blank name should accumulate both problems" {
-            val result = Item.of(id = "", name = "", category = ItemCategory.WEAPON, rarity = ItemRarity.COMMON, sourceBook = SourceBook.PHB)
+            val result =
+                Item.of(
+                    id = "",
+                    name = "",
+                    category = ItemCategory.WEAPON,
+                    rarity = ItemRarity.COMMON,
+                    sourceBook = SourceBook.PHB,
+                )
             result.shouldBeInstanceOf<Result.Failure>()
             result.problems shouldBe
                 listOf(
