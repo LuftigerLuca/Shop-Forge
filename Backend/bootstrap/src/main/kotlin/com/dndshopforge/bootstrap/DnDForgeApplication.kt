@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
     basePackages = [
         "com.dndshopforge.persistence",
         "com.dndshopforge.bootstrap",
+        "com.dndshopforge.web",
     ],
 )
 @EnableJpaRepositories(basePackages = ["com.dndshopforge.persistence"])
