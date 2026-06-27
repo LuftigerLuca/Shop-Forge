@@ -1,4 +1,6 @@
 package com.dndshopforge.domain.gateway
 
-interface ItemGateway {
-}
+import com.dndshopforge.domain.model.item.Item
+import com.dndshopforge.domain.model.item.ItemId
+
+interface ItemGateway : ReadWriteGateway<Item, ItemId>

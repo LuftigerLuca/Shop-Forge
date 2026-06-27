@@ -15,3 +15,4 @@ pluginManagement {
 
 include(":domain")
 include(":application")
+include(":persistence")

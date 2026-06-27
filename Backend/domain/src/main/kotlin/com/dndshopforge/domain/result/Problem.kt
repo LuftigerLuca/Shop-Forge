@@ -9,5 +9,6 @@ data class Problem(
         NOT_FOUND,
         CONFLICT,
         INTERNAL,
+        PERSISTENCE,
     }
 }
