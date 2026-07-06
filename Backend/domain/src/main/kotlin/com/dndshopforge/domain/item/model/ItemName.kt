@@ -13,7 +13,8 @@ value class ItemName private constructor(
     companion object {
         fun of(value: String): Result<ItemName> =
             validate(value) {
-                (value.isNotBlank()) otherwise Problem(ErrorCode.ITEM_NAME_BLANK, "Item name must not be empty", Problem.ProblemType.VALIDATION)
+                (value.isNotBlank()) otherwise
+                    Problem(ErrorCode.ITEM_NAME_BLANK, "Item name must not be empty", Problem.ProblemType.VALIDATION)
                 (value.length <= 100) otherwise
                     Problem(
                         ErrorCode.ITEM_NAME_TOO_LONG,

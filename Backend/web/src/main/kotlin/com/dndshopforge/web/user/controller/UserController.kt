@@ -25,11 +25,14 @@ class UserController(
     ): ResponseEntity<*> {
         val request =
             LoginUserMapper.toDomain(body).getOrNull()
-                ?: return ResponseEntity.badRequest().body(mapOf(
-                    "errors" to listOf(
-                        mapOf("code" to ErrorCode.INVALID_INPUT.name, "message" to "Invalid input")
-                    )
-                ))
+                ?: return ResponseEntity.badRequest().body(
+                    mapOf(
+                        "errors" to
+                            listOf(
+                                mapOf("code" to ErrorCode.INVALID_INPUT.name, "message" to "Invalid input"),
+                            ),
+                    ),
+                )
 
         return presenter.present(factory[LoginUserUseCase::class].execute(request))
     }

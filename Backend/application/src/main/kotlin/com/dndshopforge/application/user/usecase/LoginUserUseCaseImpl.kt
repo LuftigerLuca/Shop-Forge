@@ -17,10 +17,14 @@ internal class LoginUserUseCaseImpl(
     override fun execute(request: LoginUserRequest): Result<LoginUserResponse> {
         val user =
             gateway.findByUsername(request.username).getOrNull()
-                ?: return Result.Failure(listOf(Problem(ErrorCode.LOGIN_INVALID_CREDENTIALS, "Invalid username or password", Problem.ProblemType.UNAUTHORIZED)))
+                ?: return Result.Failure(
+                    listOf(Problem(ErrorCode.LOGIN_INVALID_CREDENTIALS, "Invalid username or password", Problem.ProblemType.UNAUTHORIZED)),
+                )
 
         if (!hasher.verify(request.password.value, user.passwordHash.value)) {
-            return Result.Failure(listOf(Problem(ErrorCode.LOGIN_INVALID_CREDENTIALS, "Invalid username or password", Problem.ProblemType.UNAUTHORIZED)))
+            return Result.Failure(
+                listOf(Problem(ErrorCode.LOGIN_INVALID_CREDENTIALS, "Invalid username or password", Problem.ProblemType.UNAUTHORIZED)),
+            )
         }
 
         val response =

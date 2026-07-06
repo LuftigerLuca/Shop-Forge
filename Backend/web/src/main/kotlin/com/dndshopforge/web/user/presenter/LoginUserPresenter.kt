@@ -22,11 +22,14 @@ class LoginUserPresenter(
 
             is Result.Failure -> {
                 val status = result.problems.toHttpStatus()
-                ResponseEntity.status(status).body(mapOf(
-                    "errors" to result.problems.map { p ->
-                        mapOf("code" to p.code.name, "message" to p.message)
-                    }
-                ))
+                ResponseEntity.status(status).body(
+                    mapOf(
+                        "errors" to
+                            result.problems.map { p ->
+                                mapOf("code" to p.code.name, "message" to p.message)
+                            },
+                    ),
+                )
             }
         }
 }

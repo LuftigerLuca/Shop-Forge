@@ -15,7 +15,8 @@ value class ItemId private constructor(
         fun of(value: String): Result<ItemId> =
             validate(value) {
                 (value.isNotBlank()) otherwise Problem(ErrorCode.ITEM_ID_BLANK, "Item ID must not be empty", Problem.ProblemType.VALIDATION)
-                (value.length <= 36) otherwise Problem(ErrorCode.ITEM_ID_TOO_LONG, "Item ID must not exceed 36 characters", Problem.ProblemType.VALIDATION)
+                (value.length <= 36) otherwise
+                    Problem(ErrorCode.ITEM_ID_TOO_LONG, "Item ID must not exceed 36 characters", Problem.ProblemType.VALIDATION)
             }.map { ItemId(it) }
 
         fun random() = ItemId(UUID.randomUUID().toString())

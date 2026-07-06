@@ -13,8 +13,10 @@ value class UserPasswordHash private constructor(
     companion object {
         fun of(value: String): Result<UserPasswordHash> =
             validate(value) {
-                (value.isNotBlank()) otherwise Problem(ErrorCode.HASH_BLANK, "Password hash must not be empty", Problem.ProblemType.VALIDATION)
-                (value.length <= 128) otherwise Problem(ErrorCode.HASH_TOO_LONG, "Password hash must not exceed 128 characters", Problem.ProblemType.VALIDATION)
+                (value.isNotBlank()) otherwise
+                    Problem(ErrorCode.HASH_BLANK, "Password hash must not be empty", Problem.ProblemType.VALIDATION)
+                (value.length <= 128) otherwise
+                    Problem(ErrorCode.HASH_TOO_LONG, "Password hash must not exceed 128 characters", Problem.ProblemType.VALIDATION)
                 (value.length >= 32) otherwise
                     Problem(
                         ErrorCode.HASH_TOO_SHORT,

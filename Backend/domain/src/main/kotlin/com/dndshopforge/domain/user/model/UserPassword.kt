@@ -13,7 +13,8 @@ value class UserPassword private constructor(
     companion object {
         fun of(value: String): Result<UserPassword> =
             validate(value) {
-                (value.isNotBlank()) otherwise Problem(ErrorCode.PASSWORD_BLANK, "Password must not be empty", Problem.ProblemType.VALIDATION)
+                (value.isNotBlank()) otherwise
+                    Problem(ErrorCode.PASSWORD_BLANK, "Password must not be empty", Problem.ProblemType.VALIDATION)
             }.map { UserPassword(it) }
     }
 }
