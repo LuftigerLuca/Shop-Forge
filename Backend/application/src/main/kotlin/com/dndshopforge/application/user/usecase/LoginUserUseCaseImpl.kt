@@ -1,6 +1,7 @@
 package com.dndshopforge.application.user.usecase
 
 import com.dndshopforge.application.shared.security.PasswordHasher
+import com.dndshopforge.domain.shared.result.ErrorCode
 import com.dndshopforge.domain.shared.result.Problem
 import com.dndshopforge.domain.shared.result.Result
 import com.dndshopforge.domain.shared.result.getOrNull
@@ -16,10 +17,10 @@ internal class LoginUserUseCaseImpl(
     override fun execute(request: LoginUserRequest): Result<LoginUserResponse> {
         val user =
             gateway.findByUsername(request.username).getOrNull()
-                ?: return Result.Failure(listOf(Problem("User not found", Problem.ProblemType.NOT_FOUND)))
+                ?: return Result.Failure(listOf(Problem(ErrorCode.LOGIN_INVALID_CREDENTIALS, "Invalid username or password", Problem.ProblemType.UNAUTHORIZED)))
 
         if (!hasher.verify(request.password.value, user.passwordHash.value)) {
-            return Result.Failure(listOf(Problem("Invalid password", Problem.ProblemType.UNAUTHORIZED)))
+            return Result.Failure(listOf(Problem(ErrorCode.LOGIN_INVALID_CREDENTIALS, "Invalid username or password", Problem.ProblemType.UNAUTHORIZED)))
         }
 
         val response =

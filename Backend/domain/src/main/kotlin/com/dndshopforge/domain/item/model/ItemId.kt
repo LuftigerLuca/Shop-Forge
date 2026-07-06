@@ -1,5 +1,6 @@
 package com.dndshopforge.domain.item.model
 
+import com.dndshopforge.domain.shared.result.ErrorCode
 import com.dndshopforge.domain.shared.result.Problem
 import com.dndshopforge.domain.shared.result.Result
 import com.dndshopforge.domain.shared.result.map
@@ -13,8 +14,8 @@ value class ItemId private constructor(
     companion object {
         fun of(value: String): Result<ItemId> =
             validate(value) {
-                (value.isNotBlank()) otherwise Problem("must not be blank", Problem.ProblemType.VALIDATION)
-                (value.length <= 36) otherwise Problem("must not exceed 36 characters", Problem.ProblemType.VALIDATION)
+                (value.isNotBlank()) otherwise Problem(ErrorCode.ITEM_ID_BLANK, "Item ID must not be empty", Problem.ProblemType.VALIDATION)
+                (value.length <= 36) otherwise Problem(ErrorCode.ITEM_ID_TOO_LONG, "Item ID must not exceed 36 characters", Problem.ProblemType.VALIDATION)
             }.map { ItemId(it) }
 
         fun random() = ItemId(UUID.randomUUID().toString())

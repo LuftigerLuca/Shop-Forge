@@ -1,0 +1,21 @@
+package com.dndshopforge.domain.shared.result
+
+enum class ErrorCode {
+    USERNAME_BLANK,
+    USERNAME_TOO_LONG,
+    USERNAME_INVALID_CHARS,
+    PASSWORD_BLANK,
+    ID_BLANK,
+    ID_TOO_LONG,
+    HASH_BLANK,
+    HASH_TOO_LONG,
+    HASH_TOO_SHORT,
+    ITEM_NAME_BLANK,
+    ITEM_NAME_TOO_LONG,
+    ITEM_ID_BLANK,
+    ITEM_ID_TOO_LONG,
+    LOGIN_INVALID_CREDENTIALS,
+    USER_NOT_FOUND,
+    INVALID_INPUT,
+    INTERNAL_ERROR,
+}

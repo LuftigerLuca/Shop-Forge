@@ -21,11 +21,25 @@ class LoginUserPresenter(
             }
 
             is Result.Failure -> {
-                val problem = result.problems.firstOrNull()
-                val status = problem?.type?.toHttpStatus() ?: HttpStatus.INTERNAL_SERVER_ERROR
-                ResponseEntity.status(status).body(mapOf("error" to (problem?.message ?: "Internal error")))
+                val status = result.problems.toHttpStatus()
+                ResponseEntity.status(status).body(mapOf(
+                    "errors" to result.problems.map { p ->
+                        mapOf("code" to p.code.name, "message" to p.message)
+                    }
+                ))
             }
         }
+}
+
+private fun List<Problem>.toHttpStatus(): HttpStatus {
+    val statuses = mapNotNull { it.type?.toHttpStatus() }
+    return when {
+        HttpStatus.INTERNAL_SERVER_ERROR in statuses -> HttpStatus.INTERNAL_SERVER_ERROR
+        HttpStatus.UNAUTHORIZED in statuses -> HttpStatus.UNAUTHORIZED
+        HttpStatus.CONFLICT in statuses -> HttpStatus.CONFLICT
+        HttpStatus.NOT_FOUND in statuses -> HttpStatus.NOT_FOUND
+        else -> HttpStatus.BAD_REQUEST
+    }
 }
 
 private fun Problem.ProblemType.toHttpStatus(): HttpStatus =

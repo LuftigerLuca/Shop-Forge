@@ -1,5 +1,6 @@
 package com.dndshopforge.persistence.adapter
 
+import com.dndshopforge.domain.shared.result.ErrorCode
 import com.dndshopforge.domain.shared.result.Problem
 import com.dndshopforge.domain.shared.result.Result
 import com.dndshopforge.domain.user.gateway.UserGateway
@@ -26,6 +27,7 @@ class UserGatewayAdapter(
                 Result.Failure(
                     mapped.problems.map {
                         Problem(
+                            code = it.code,
                             message = it.message,
                             type = Problem.ProblemType.PERSISTENCE,
                         )
@@ -39,7 +41,7 @@ class UserGatewayAdapter(
         repository
             .findById(id.value)
             .map { toResult(it) }
-            .orElse(Result.Failure(listOf(Problem("User not found", Problem.ProblemType.NOT_FOUND))))
+            .orElse(Result.Failure(listOf(Problem(ErrorCode.USER_NOT_FOUND, "User not found", Problem.ProblemType.NOT_FOUND))))
 
     override fun existsById(id: UserId): Boolean = repository.existsById(id.value)
 
@@ -58,7 +60,7 @@ class UserGatewayAdapter(
         repository
             .findByName(username.value)
             ?.let { toResult(it) }
-            ?: Result.Failure(listOf(Problem("User not found", Problem.ProblemType.NOT_FOUND)))
+            ?: Result.Failure(listOf(Problem(ErrorCode.USER_NOT_FOUND, "User not found", Problem.ProblemType.NOT_FOUND)))
 
     override fun existsByUsername(username: UserName): Boolean = repository.existsByName(username.value)
 }
