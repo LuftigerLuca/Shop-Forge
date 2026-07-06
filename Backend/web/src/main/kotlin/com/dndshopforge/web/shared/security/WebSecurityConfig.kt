@@ -51,7 +51,7 @@ open class WebSecurityConfig(
             }.authorizeHttpRequests {
                 it
                     .requestMatchers(
-                        "/api/v1/auth/**",
+                        "/api/v1/user/login",
                     ).permitAll()
                     .anyRequest()
                     .authenticated()

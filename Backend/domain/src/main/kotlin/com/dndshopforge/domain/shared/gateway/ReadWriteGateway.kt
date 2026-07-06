@@ -1,7 +1,8 @@
 package com.dndshopforge.domain.shared.gateway
+
 import com.dndshopforge.domain.shared.result.Result
 
-interface ReadWriteGateway<T, ID> {
+interface ReadWriteGateway<T, ID> : Gateway {
     fun findById(id: ID): Result<T>
 
     fun existsById(id: ID): Boolean
